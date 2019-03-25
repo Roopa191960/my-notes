@@ -96,3 +96,95 @@ Components can be thought of as small pieces of an interface that are independen
 * Or shorthand: `ng g c <DIR_NAME>/<COMP_NAME>`
 
 * It declares and includes everything required.
+
+### 4.3. Component properties
+
+* typescript file: `template` -> direct HTML input, `templateUrl` -> points to external file.
+* use `` instreaad of `''`
+* Same can be applied to style as well: use `styleUrls: []` or `styles: [``]`.
+
+### 4.4. Component selector options
+
+1. Component selector: `selector: 'app-root'` ->use `<app-root></app-root>` 
+2. Attribute selector: `selector: '[app-root]'` use: `<div app-root></div>`
+3. Select by class: `selector: '.app-root'` use: `<div class="app-root"></div>`
+
+## 5. Data binding
+Communication between typescript to HTML
+
+* One way or Two way.
+
+1. String interpolation -> `{{ data }}`, `{{ fun_ret_string() }}`
+2. Propert binding -> `[property] = "data"`. Properties like disabled, innerText, etc
+    ```html
+    <button [disabled]="!allowNewServer">Add new</button>
+    ```
+    ```js
+    allowNewServer = false;
+    constructor(){
+        setTimeout(() => {
+        this.allowNewServer = true;
+        }, 2000);
+    }
+    ```
+3. Event binding -> `(event) = "expression"`
+
+    Example 1
+    ```html
+    <button (click)="onCreateServer()">Add new</button>
+    ```
+    ```js
+    onCreateServer(){
+        console.log('Clickec');
+    }
+    ```
+
+    Example 2
+    ```html
+    <input type="text" name="servername" (input)="onNameUpdate($event)">
+    ```
+    ```js
+    onNameUpdate(event: any){
+        this.serverName = event.target.value;
+    }
+    ```
+
+4. Two way data binding -> `[(ngModel)] = "data"`
+    ```html
+    <input type="text" name="servername" [(ngModel)]="serverName">
+    ```
+    ```js
+    serverName = 'pre-filled-value';
+    ```
+    ** Requires `import { FormsModule } from '@angular/forms';` & `imports: [FormsModule],`  in app.module.ts.
+
+## 6. Directives
+
+Directives are instructions in the DOM. An Attribute directive changes the appearance or behavior of a DOM element.
+
+There are three kinds of directives in Angular:
+1. **Components** directives with a template.
+
+    `<app-root></app-root>`
+
+2. **Structural directives** change the DOM layout by adding and removing DOM elements.
+
+    ```html
+    <!-- If -->
+    <p *ngIf="Condition_statement"> text</p>
+    <!-- If Else -->
+    <p class="alert alert-info" *ngIf="allowNewServer; else noAllow">You are allowed to create</p>
+    <ng-template #noAllow>
+        <p class="alert alert-danger">You are allowed to create</p>
+    </ng-template>
+    ```
+
+3. **Attribute directives** change the appearance or behavior of an element, component, or another directive
+    ```html
+    <!-- Inline -->
+    <h2 [ngStyle] = "{'color': 'gray'}" >text</h2>
+    <!-- Using function -->
+    <h2 class="text-center" [ngStyle] = "{'background-color': getColor()}" >text</h2>
+    <!-- Adding classes -->
+    <h2 class="text-center" [ngClass] = "{'my-class': serverStatus === 'online'}" >text</h2>
+    ```
