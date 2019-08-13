@@ -1,3 +1,4 @@
+> ****WIP***
 # Angular
 
 # 1. Introdution
@@ -10,13 +11,15 @@ Angular is a platform that makes it easy to build applications with the web. Ang
 1. Install NodeJS + NPM
 2. Check compatible/laterst versions: `npm -v` & `node -v`
 3. Install Angular: `npm install -g @angular/cli`
-4. Uninstall & install if required: `npm uninstall -g angular-cli @angular/cli `, `npm cache clean` and `npm install -g @angular/cli`
+4. Uninstall & install if required: `npm uninstall -g angular-cli @angular/cli `. , `npm cache clean` and `npm install -g @angular/cli`
 5. Check `ng --version`
 6. New project: `ng new <PROJ_DIR>` 
 7. Run project: `ng serve --open` -> keep it running! It got browser sync to rebuild and refresh in it :). `--open` opens browser.
 8. Open project at: `http://localhost:4200/` 
 
 ## 3. Structure
+
+![File-Structure](angular-files.png)
 
 * The `node_modules` directory is where all of the libraries we need to build Angular are stored.
 * In the `src` directory, is placed the source code of your application.
@@ -77,7 +80,7 @@ Components can be thought of as small pieces of an interface that are independen
         }
     ```
 * Create component html file. `server.component.html`
-* Declare new component at `app.module.ts`.
+* Declare new component in `app.module.ts`.
     ```js
     import { ServerComponent } from './components/server/server.component';
     ...
@@ -188,3 +191,8 @@ There are three kinds of directives in Angular:
     <!-- Adding classes -->
     <h2 class="text-center" [ngClass] = "{'my-class': serverStatus === 'online'}" >text</h2>
     ```
+
+## 7. Models
+
+Objects which hold your data and accessible to all other components.
+
